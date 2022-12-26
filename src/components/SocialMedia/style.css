@@ -1,0 +1,20 @@
+/* social media icon style */
+
+.social-media-icons{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.social-media-icons div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    margin: 2rem 1rem;
+    height: 4rem;
+    width: 4rem;
+}

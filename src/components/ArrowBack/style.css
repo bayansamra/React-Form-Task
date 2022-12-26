@@ -1,0 +1,16 @@
+
+.Arrow-back-cont img{
+    display: flex;
+    cursor: pointer;
+    gap: 1rem;
+    font-size: 0.2rem;
+    
+}
+
+
+.Arrow-back-cont h4{
+    font-size: 1rem;
+    color: #8692A6;
+    margin: -20px 22px;
+
+}

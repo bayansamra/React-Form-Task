@@ -1,0 +1,60 @@
+/* strong password style*/
+
+.password-strength{
+    margin-bottom: 1rem;
+    width: 100%!important;
+}
+
+.password-strength-very-strong{
+    background-color: rgb(28, 194, 28);
+    border-radius: 2rem;
+    height: 5px;
+    width: 100%!important;
+}
+
+.reasons-very-strong{
+    color: rgb(28, 194, 28);
+    font-size: 1rem;
+}
+
+/* strong style */
+
+.password-strength-strong{
+    background-color: rgb(14, 97, 14);
+    border-radius: 2rem;
+    height: 5px;
+    width: 70%!important;
+}
+
+.reasons-strong{
+    color: rgb(14, 97, 14);
+    font-size: 1rem;
+}
+
+/* medium style */
+
+.password-strength-medium{
+    background-color: rgb(218, 146, 14);
+    border-radius: 2rem;
+    height: 5px;
+    width: 40%!important;
+}
+
+.reasons-medium{
+    color: rgb(218, 146, 14);
+    font-size: 1rem;
+}
+
+/* low style */
+
+.password-strength-low{
+    background-color: rgb(250, 23, 23);
+    border-radius: 2rem;
+    height: 5px;
+    width: 20%!important;
+}
+
+.reasons-low{
+    color: rgb(250, 23, 23);
+    font-size: 1rem;
+}

@@ -1,0 +1,24 @@
+
+.left-side
+{
+    position: relative;
+    background: url('../../assets/bg_image.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.image-cover
+{
+    position: absolute;
+    background: #1565D8;
+    height: 100%;
+    width: 100%;
+    opacity: 0.9;
+}
+
+@media screen and (max-width:992px) {
+    .left-side{
+        display: none;
+    }
+}

@@ -1,0 +1,33 @@
+/* right content container style */
+
+.right-content-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+.flex-container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    
+}
+
+
+.right-content-header{
+    position: absolute;
+    top: 4rem;
+    left: 0;
+}
+
+@media screen and (max-width:992px) {
+    .right-content-container{
+        min-height: 100vh;
+    }
+}

@@ -1,0 +1,94 @@
+/* social media icon style */
+
+.social-media-icons
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+}
+
+.social-media-icons div
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #FFFFFF;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    margin: 2rem 1rem;
+    height: 4rem;
+    width: 4rem;
+}
+
+/* form-login-header style */
+
+.form-login-header
+{
+    text-align: center;
+}
+
+.form-login-header h2
+{
+    font-size: 42px;
+    font-weight: 700;
+    line-height: 51px;
+}
+
+
+/* form-login-footer style */
+
+.form-login-footer
+{
+    text-align: center;
+    width: 80%;
+    margin: 1rem;
+}
+
+.form-login-footer h4
+{
+    display: inline-block;
+    color: #696F79;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+}
+
+.form-login-footer button
+{
+    display: inline-block;
+    cursor: pointer;
+    background:none;
+    color:#1565D8;
+    border:none;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 19px;
+}
+
+
+@media screen and (max-width:992px) {
+    .login-form-section{
+        margin-top: -30rem!important;
+    }
+
+    .form-section form div{
+        max-width: 100%;
+    }
+
+    .social-media-icons{
+        width: 100%;
+    }
+
+    .form-login-footer{
+        width: 100%;
+    }
+
+    .form-header{
+        max-width: 100%;
+    }
+    
+    .login-button{
+        max-width: 100%;
+    }
+}

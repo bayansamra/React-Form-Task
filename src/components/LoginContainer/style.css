@@ -1,0 +1,11 @@
+.Login-container{
+    display: grid;
+    grid-template-columns: 45% 1fr;
+    min-height: 1024px;
+}
+
+@media screen and (max-width:992px) {
+    .Login-container{
+        grid-template-columns: 100vw;
+    }
+}
