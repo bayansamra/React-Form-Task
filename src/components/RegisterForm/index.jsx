@@ -1,17 +1,35 @@
 import React, { Component } from 'react'
 import PasswordStrength from '../PasswordStrength'
 import HorizentalLine from '../HorizLine'
+import { boolean, object, ref, string } from 'yup';
 import './style.css'
+
+const regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+
+
 
 export default class RegisterForm extends Component {
 
   state = {
+    name:'',
     email:'',
     password:'',
     password2:'',
     trems:false,
     passwordStrength:0
   }
+
+   schema = object().shape({
+    name: string().min(6, 'Name Should be more than 8').max(16,'Name Should be less than 16').required(),
+    email: string().email().required(),
+    password: string().min(8).matches(regularExpression).required(),
+    password2: string()
+      .oneOf([ref('password'), null])
+      .required(),
+      trems: boolean().oneOf([true]).required(),
+      passwordStrength:string().max(60,'your password strength should be at least Medium strength.').matches(regularExpression).required(),
+  });
+
 
   onChange = (e)=>{
     let strength = 0;
@@ -55,25 +73,23 @@ export default class RegisterForm extends Component {
     this.setState({trems:!this.state.trems})
   }
 
+
   handleSubmit = (e) =>{
     e.preventDefault()
-    if(this.state.password.length < 8){
-      alert('your password should be at least 8 characters.')
-
-    }else if(this.state.password !== this.state.password2){
-      alert('please make sure that passwords matches!')
-
-    }else if(this.state.passwordStrength < 60){
-      alert('your password strength should be at lease Medium strength.')
-
-    }else{
-      alert('registered successfuly!')
-      const newUser = {email:this.state.email,password:this.state.password}
+    this.schema
+      .validate({ name:this.state.name,email:this.state.email,password:this.state.password, rePassword: this.state.password, inChecked: true }, { abortEarly: false })
+      .then(() => {
+        console.log('valid');
+        this.setState((prevState) => ({ name: prevState.name, email: prevState.email, password: prevState.password }));
+      })
+      .catch((e) => console.log(e.errors));
+      const newUser = {name:this.state.name, email:this.state.email,password:this.state.password}
       this.props.addUser(newUser);
       this.setState({email:'',password:'',password2:'',trems:false,passwordStrength:0})
       this.props.changePage('login')
-    }
-  }
+  };
+
+  
 
   render() {
     return (
@@ -84,6 +100,10 @@ export default class RegisterForm extends Component {
         </div>
         <hr />
         <form onSubmit={this.handleSubmit}>
+        <div className='form-input'>
+              <label htmlFor="name">Your Name</label>
+              <input type="text" name='name' value={this.state.name} onChange={this.onChange} placeholder='Enter your name' required/>
+          </div>
           <div className='form-input'>
             <label htmlFor="email">Email Address*</label>
             <input type="email" name='email' value={this.state.email} onChange={this.onChange} placeholder='Enter email address' required/>

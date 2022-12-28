@@ -1,14 +1,25 @@
 import React, { Component } from 'react'
 import SocialMedia from '../SocialMedia'
 import HorizentalLine from '../HorizLine'
+import { object, string } from 'yup';
 import './style.css'
+
+
+const regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
 
 export default class LoginForm extends Component {
 
   state = {
+    name:'',
     email:'',
     password:''
   }
+
+  schema = object().shape({
+    name: string().min(6, 'Name Should be more than 8').max(16,'Name Should be less than 16').required(),
+    email: string().email().required(),
+    password: string().min(8).matches(regularExpression).required(),
+  });
 
 
   onChange = (e)=>{
@@ -19,17 +30,16 @@ export default class LoginForm extends Component {
 
   handleSubmit = (e) =>{
     e.preventDefault()
-    if(this.state.password.length < 8){
-      alert('your password should be at least 8 characters')
-    }else if(this.props.checkUser(this.state) === 'inValid'){
-      alert('this user email dosent exist.')
-    }else if(this.props.checkUser(this.state) === 'invalid password'){
-      alert('the password is worng, try again.')
-    }else{
-      alert(`logged in succsessfuly, welcome again ${this.state.email.split('@')[0]}`)
-      this.setState({email:'',password:''})
-    }
-  }
+
+    this.schema
+      .validate({name:this.state.name,email:this.state.email,password:this.state.password}, { abortEarly: false })
+      .then(() => {
+        console.log('valid');
+        this.setState((prevState) => ({  name: prevState.name, email: prevState.email, password: prevState.password }));
+      })
+      .catch((e) => console.log(e.errors));
+  };
+
 
   render() {
     return (
@@ -43,6 +53,10 @@ export default class LoginForm extends Component {
         <HorizentalLine />
         
         <form onSubmit={this.handleSubmit}>
+        <div className='form-input'>
+              <label htmlFor="name">Your Name</label>
+              <input type="text" name='name' value={this.state.name} onChange={this.onChange} placeholder='Enter your name' required/>
+          </div>
           <div className='form-input'>
               <label htmlFor="email">Your email</label>
               <input type="email" name='email' value={this.state.email} onChange={this.onChange} placeholder='Enter email address' required/>
