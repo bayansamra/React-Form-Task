@@ -33,7 +33,7 @@ export default class LoginForm extends Component {
       .validate({email:this.state.email,password:this.state.password}, { abortEarly: false })
       .then(() => {
         console.log('valid');
-        this.setState((prevState) => ({ email: prevState.email, password: prevState.password }));
+        this.setState((prevState) => ({ email: '', password: '' }));
       })
       .catch((e) => console.log(e.errors));
   };

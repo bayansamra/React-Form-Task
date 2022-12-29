@@ -20,7 +20,7 @@ export default class RegisterForm extends Component {
   }
 
    schema = object().shape({
-    name: string().min(6, 'Name Should be more than 8').max(16,'Name Should be less than 16').required(),
+    name: string().min(8, 'Name Should be more than 8').max(16,'Name Should be less than 16').required(),
     email: string().email().required(),
     password: string().min(8).matches(regularExpression).required(),
     password2: string()
@@ -80,7 +80,7 @@ export default class RegisterForm extends Component {
       .validate({ name:this.state.name,email:this.state.email,password:this.state.password, rePassword: this.state.password, inChecked: true }, { abortEarly: false })
       .then(() => {
         console.log('valid');
-        this.setState((prevState) => ({ name: prevState.name, email: prevState.email, password: prevState.password }));
+        this.setState((prevState) => ({ name: '', email:'', password: ''}));
       })
       .catch((e) => console.log(e.errors));
       const newUser = {name:this.state.name, email:this.state.email,password:this.state.password}
