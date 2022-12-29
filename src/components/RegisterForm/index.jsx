@@ -85,7 +85,7 @@ export default class RegisterForm extends Component {
       .catch((e) => console.log(e.errors));
       const newUser = {name:this.state.name, email:this.state.email,password:this.state.password}
       this.props.addUser(newUser);
-      this.setState({email:'',password:'',password2:'',trems:false,passwordStrength:0})
+      this.setState({name:'',email:'',password:'',password2:'',trems:false,passwordStrength:0})
       this.props.changePage('login')
   };
 
