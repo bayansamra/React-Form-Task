@@ -26,7 +26,7 @@ export default class Register extends Component {
             </TransBackground>
     
             <Container>
-                <RightSide addUser={this.props.addUser} changePage={this.props.changePage} type='register' />
+                <RightSide addUser={this.props.addUser} type='register' />
             </Container>
         </LoginContainer>
     )

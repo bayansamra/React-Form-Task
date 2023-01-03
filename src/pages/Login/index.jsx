@@ -24,7 +24,7 @@ export default class Login extends Component {
             </Container> 
                
             <Container>
-                <RightSide  checkUser={this.props.checkUser} changePage={this.props.changePage}/>
+                <RightSide  checkUser={this.props.checkUser} />
             </Container>
         </LoginContainer>
     )
