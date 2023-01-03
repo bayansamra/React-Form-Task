@@ -7,8 +7,8 @@ import './style.css'
 export default class RightSide extends Component {
   render() {
     return (
-      <RightStructureContainer  header={<ArrowBack changePage={this.props.changePage} />} type={this.props.type}>
-        <Form  checkUser={this.props.checkUser} addUser={this.props.addUser}  changePage={this.props.changePage} type={this.props.type} />
+      <RightStructureContainer  header={<ArrowBack />} type={this.props.type}>
+        <Form  checkUser={this.props.checkUser} addUser={this.props.addUser}  type={this.props.type} />
       </RightStructureContainer>
     )
   }

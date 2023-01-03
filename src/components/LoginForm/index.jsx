@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import SocialMedia from '../SocialMedia'
 import HorizentalLine from '../HorizLine'
+import {Link,Navigate} from 'react-router-dom'
 import { object, string } from 'yup';
 import './style.css'
 
@@ -11,7 +12,9 @@ export default class LoginForm extends Component {
 
   state = {
     email:'',
-    password:''
+    password:'',
+    profilePath:''
+
   }
 
   schema = object().shape({
@@ -33,13 +36,18 @@ export default class LoginForm extends Component {
       .validate({email:this.state.email,password:this.state.password}, { abortEarly: false })
       .then(() => {
         console.log('valid');
-        this.setState((prevState) => ({ email: '', password: '' }));
+        this.setState((prevState) => ({ email: '', password: '',profilePath:`${this.state.email.split('@')[0]}`}));
       })
       .catch((e) => console.log(e.errors));
   };
 
 
   render() {
+
+    if(this.state.goToProfile){
+      return <Navigate to={`/profile/${this.state.profilePath}`} />
+    }
+
     return (
       <div className='form-section login-form-section'>
         <div className='form-header form-login-header'>
@@ -66,7 +74,7 @@ export default class LoginForm extends Component {
         </form>
         <div className='form-login-footer'>
             <h4>Dont have an account? </h4>
-            <button onClick={()=> this.props.changePage('register')}>Register</button>
+            <Link className='form-login-footer-btn' to='/register'>Register</Link>
         </div>
       </div>
     )

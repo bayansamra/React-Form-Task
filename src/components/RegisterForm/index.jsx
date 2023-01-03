@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PasswordStrength from '../PasswordStrength'
 import HorizentalLine from '../HorizLine'
 import { boolean, object, ref, string } from 'yup';
+import {Link,Navigate} from 'react-router-dom'
+
 import './style.css'
 
 const regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
@@ -16,7 +18,9 @@ export default class RegisterForm extends Component {
     password:'',
     password2:'',
     trems:false,
-    passwordStrength:0
+    passwordStrength:0,
+    goToLogin:false,
+
   }
 
    schema = object().shape({
@@ -92,6 +96,10 @@ export default class RegisterForm extends Component {
   
 
   render() {
+    if(this.state.goToLogin){
+      return <Navigate to='/' />
+    }
+
     return (
         <div className='form-section'>
         <div className='form-header'>
@@ -129,7 +137,7 @@ export default class RegisterForm extends Component {
           
             <HorizentalLine />
         </form>
-        <button className='login-button' onClick={()=>this.props.changePage('login')}>login</button>
+        <Link to='/' className='login-button' >login</Link>
       </div>
     )
   }

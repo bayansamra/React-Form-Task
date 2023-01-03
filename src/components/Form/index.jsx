@@ -7,11 +7,11 @@ import './style.css'
   render() {
     if(this.props.type === 'register'){
         return (
-          <RegisterForm addUser={this.props.addUser} changePage={this.props.changePage} />
+          <RegisterForm addUser={this.props.addUser}  />
         )
       }else{
         return (
-          <LoginForm checkUser={this.props.checkUser} changePage={this.props.changePage} />
+          <LoginForm checkUser={this.props.checkUser}  />
         )
       }
     }
