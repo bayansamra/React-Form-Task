@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SocialMedia from '../SocialMedia'
 import HorizentalLine from '../HorizLine'
-import {Link,Navigate} from 'react-router-dom'
+import {Link} from 'react-router-dom'
 import { object, string } from 'yup';
 import './style.css'
 
@@ -42,6 +42,8 @@ export default class LoginForm extends Component {
 
 
   render() {
+
+   
     return (
       <div className='form-section login-form-section'>
         <div className='form-header form-login-header'>
