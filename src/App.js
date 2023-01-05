@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import {Routes,Route} from 'react-router-dom'
-import {RoutesAll} from './secRouts'
+import {RoutesAll} from './RoutesAll'
 import GameControl from "./components/GameControl/index";
 
 

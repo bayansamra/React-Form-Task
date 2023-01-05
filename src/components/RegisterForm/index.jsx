@@ -97,7 +97,7 @@ export default class RegisterForm extends Component {
 
   render() {
     if(this.state.goToLogin){
-      return <Navigate to='/' />
+      return <Navigate to='/login' />
     }
 
     return (
@@ -137,7 +137,7 @@ export default class RegisterForm extends Component {
           
             <HorizentalLine />
         </form>
-        <Link to='/' className='login-button' >login</Link>
+        <Link to='/login' className='login-button' >login</Link>
       </div>
     )
   }

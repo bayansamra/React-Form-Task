@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
 import {Routes,Route,Navigate} from 'react-router-dom'
-import {Login,Register,Game,LastPlayed} from '../../pages'
+import Login from '../pages/Login'
+import Register from '../pages/Login'
+import Game from '../pages/Login'
 
-export default class RoutesAll extends Component {
+
+export class RoutesAll extends Component {
 
   state = {
     users:[],
@@ -32,7 +35,7 @@ export default class RoutesAll extends Component {
       <Routes>
             <Route index element={<Login checkUser={this.checkUser} />} />
             <Route path='register' element={<Register addUser={this.addUser} />} />
-            <Route path='profile/:id' element={this.state.users.length > 0?
+            <Route path='profile/' element={this.state.users.length > 0?
                 <Game /> : <Navigate to='/' />} />
       </Routes>
     )

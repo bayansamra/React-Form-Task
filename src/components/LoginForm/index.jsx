@@ -13,7 +13,6 @@ export default class LoginForm extends Component {
   state = {
     email:'',
     password:'',
-    profilePath:''
 
   }
 
@@ -36,18 +35,13 @@ export default class LoginForm extends Component {
       .validate({email:this.state.email,password:this.state.password}, { abortEarly: false })
       .then(() => {
         console.log('valid');
-        this.setState((prevState) => ({ email: '', password: '',profilePath:`${this.state.email.split('@')[0]}`}));
+        this.setState((prevState) => ({ email: '', password: ''}));
       })
       .catch((e) => console.log(e.errors));
   };
 
 
   render() {
-
-    if(this.state.goToProfile){
-      return <Navigate to={`/profile/${this.state.profilePath}`} />
-    }
-
     return (
       <div className='form-section login-form-section'>
         <div className='form-header form-login-header'>
