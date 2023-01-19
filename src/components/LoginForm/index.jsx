@@ -3,16 +3,21 @@ import SocialMedia from '../SocialMedia'
 import HorizentalLine from '../HorizLine'
 import {Link} from 'react-router-dom'
 import { object, string } from 'yup';
+import axios from 'axios';
 import './style.css'
 
 
 const regularExpression = /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/;
+
+
 
 export default class LoginForm extends Component {
 
   state = {
     email:'',
     password:'',
+    isLoading: false,
+    errors: [],
 
   }
 
@@ -28,16 +33,34 @@ export default class LoginForm extends Component {
   }
 
 
-  handleSubmit = (e) =>{
-    e.preventDefault()
+  handleSubmit = async (e) => {
+    e.preventDefault();
 
+    this.setState({ isLoading: true });
     this.schema
-      .validate({email:this.state.email,password:this.state.password}, { abortEarly: false })
-      .then(() => {
-        console.log('valid');
-        this.setState((prevState) => ({ email: '', password: ''}));
+      .validate({ email: this.state.email, password: this.state.password }, { abortEarly: false })
+      .then(async ({ email, password }) => {
+        console.log(email, password);
+        const res = await axios.post('https://react-tt-api.onrender.com/api/users/login', {
+          username: 'user@user.com',
+          password:'user123',
+        });
+
+      
+        if (res) {
+          localStorage.setItem('token', res.data.token);
+          localStorage.setItem('username', res.data.username);
+          this.props.login();
+        }
       })
-      .catch((e) => console.log(e.errors));
+      .catch((error) => {
+        if (error.errors) {
+          this.setState({ errors: error.errors });
+        } else {
+          this.setState({ errors: [error.message] });
+        }
+      })
+      .finally(() => this.setState({ isLoading: false }));
   };
 
 
@@ -65,7 +88,7 @@ export default class LoginForm extends Component {
               <input type="password" name='password' value={this.state.password} onChange={this.onChange} placeholder='Password' required/>
           </div>
           <div className='form-submit'>
-              <button type='submit'>Login</button>
+              <button type='submit'>{this.state.isLoading ? 'Loading...' : 'Login'}</button>
           </div>
         </form>
         <div className='form-login-footer'>

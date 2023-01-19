@@ -2,7 +2,8 @@ import React, { Component } from 'react'
 import PasswordStrength from '../PasswordStrength'
 import HorizentalLine from '../HorizLine'
 import { boolean, object, ref, string } from 'yup';
-import {Link,Navigate} from 'react-router-dom'
+import {Link,Navigate} from 'react-router-dom';
+import axios from 'axios';
 
 import './style.css'
 
@@ -19,7 +20,8 @@ export default class RegisterForm extends Component {
     password2:'',
     trems:false,
     passwordStrength:0,
-    goToLogin:false,
+    isLoading: false,
+    errors: [],
 
   }
 
@@ -77,21 +79,37 @@ export default class RegisterForm extends Component {
     this.setState({trems:!this.state.trems})
   }
 
+  handleSubmit = async (e) => {
+    e.preventDefault();
 
-  handleSubmit = (e) =>{
-    e.preventDefault()
+    this.setState({ isLoading: true });
     this.schema
-      .validate({ name:this.state.name,email:this.state.email,password:this.state.password, rePassword: this.state.password, inChecked: true }, { abortEarly: false })
-      .then(() => {
-        console.log('valid');
-        this.setState((prevState) => ({ name: '', email:'', password: ''}));
+      .validate({name:this.state.name, email: this.state.email, password: this.state.password ,password2:this.state.password,trems:true}, { abortEarly: false })
+      .then(async ({ name,email, password }) => {
+        console.log(name,email, password);
+        const res = await axios.post('https://react-tt-api.onrender.com/api/users/signup', {
+          name,
+          username: email,
+          password,
+        });
+
+
+        if (res) {
+          localStorage.setItem('token', res.data.token);
+          localStorage.setItem('username', res.data.username);
+          this.props.login();
+        }
       })
-      .catch((e) => console.log(e.errors));
-      const newUser = {name:this.state.name, email:this.state.email,password:this.state.password}
-      this.props.addUser(newUser);
-      this.setState({name:'',email:'',password:'',password2:'',trems:false,passwordStrength:0})
-      this.props.changePage('login')
+      .catch((error) => {
+        if (error.errors) {
+          this.setState({ errors: error.errors });
+        } else {
+          this.setState({ errors: [error.message] });
+        }
+      })
+      .finally(() => this.setState({ isLoading: false }));
   };
+
 
   
 
@@ -132,7 +150,7 @@ export default class RegisterForm extends Component {
           </div>
 
           <div className='form-submit'>
-            <button type='submit'>Register Account</button>
+            <button type='submit'>{this.state.isLoading ? 'Loading...' : 'Register Account'}</button>
           </div>
           
             <HorizentalLine />
