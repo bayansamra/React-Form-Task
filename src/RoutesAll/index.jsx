@@ -35,7 +35,7 @@ export class RoutesAll extends Component {
       <Routes>
             <Route index element={<Login checkUser={this.checkUser} />} />
             <Route path='register' element={<Register addUser={this.addUser} />} />
-            <Route path='profile/' element={this.state.users.length > 0?
+            <Route path='profile' element={this.state.users.length > 0?
                 <Game /> : <Navigate to='/' />} />
       </Routes>
     )

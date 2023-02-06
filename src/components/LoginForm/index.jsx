@@ -88,7 +88,7 @@ export default class LoginForm extends Component {
               <input type="password" name='password' value={this.state.password} onChange={this.onChange} placeholder='Password' required/>
           </div>
           <div className='form-submit'>
-              <button type='submit'>{this.state.isLoading ? 'Loading...' : 'Login'}</button>
+              <button type='submit' >{this.state.isLoading ? 'Loading...' : 'Login'}</button>
           </div>
         </form>
         <div className='form-login-footer'>
